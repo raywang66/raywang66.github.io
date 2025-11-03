@@ -57,12 +57,13 @@ layout: default
   </aside>
 
   <main class="site-main">
+    {% assign posts_collection = paginator.posts | default: site.posts %}
     <div class="posts-grid">
-      {% for post in site.posts %}
+      {% for post in posts_collection %}
         <article class="post-card">
           {% if post.header and post.header.teaser %}
             <a class="post-card__image-link" href="{{ post.url | relative_url }}">
-              <img class="post-card__image" src="{{ post.header.teaser | relative_url }}" alt="{{ post.title }}">
+              <img class="post-card__image" src="{{ post.header.teaser }}" alt="{{ post.title }}">
             </a>
           {% endif %}
 
@@ -90,5 +91,16 @@ layout: default
         </article>
       {% endfor %}
     </div>
+    {% if paginator and paginator.total_pages > 1 %}
+    <nav class="pagination" aria-label="Pagination" style="margin-top:2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      {% if paginator.previous_page %}
+        <a class="prev" href="{{ paginator.previous_page_path | relative_url }}" style="text-decoration:none;padding:.4rem .75rem;border:1px solid var(--monet-blue);border-radius:8px;color:var(--monet-blue)">&laquo; Newer</a>
+      {% endif %}
+      <span class="page-number" style="color:var(--monet-purple);font-size:.9rem">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+      {% if paginator.next_page %}
+        <a class="next" href="{{ paginator.next_page_path | relative_url }}" style="text-decoration:none;padding:.4rem .75rem;border:1px solid var(--monet-blue);border-radius:8px;color:var(--monet-blue)">Older &raquo;</a>
+      {% endif %}
+    </nav>
+    {% endif %}
   </main>
 </div>

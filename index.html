@@ -1,5 +1,87 @@
 ﻿---
-layout: home-custom
+layout: default
 author_profile: true
+title: Home
 ---
+<style>
+	:root{--monet-blue:#4FA4B8;--monet-light-blue:#B7D9E2;--monet-purple:#9B8AA6;--monet-pink:#E8B7C1;--monet-green:#7DAD9C;--monet-cream:#F5E6D3;--monet-background:#FAFAFA}
+	.site-grid{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;padding:2rem}
+	.site-sidebar{position:sticky;top:1.5rem;padding:1rem;background:transparent}
+	.sidebar-inner{background:var(--monet-cream);padding:1rem;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.04)}
+	.sidebar-title{margin:0 0 .5rem;color:var(--monet-purple);font-size:1rem}
+	.main-navigation ul{list-style:none;margin:0;padding:0}
+	.main-navigation li{margin:0.5rem 0}
+	.main-navigation a{color:#333;text-decoration:none;padding:.25rem .5rem;border-radius:6px;display:inline-block}
+	.main-navigation a:hover{background:var(--monet-light-blue);color:var(--monet-blue)}
+	.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem}
+	.post-card{background:var(--monet-background);border-radius:12px;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 4px 6px rgba(0,0,0,.06)}
+	.post-card:hover{transform:translateY(-4px);box-shadow:0 10px 18px rgba(0,0,0,.09)}
+	.post-card__image{width:100%;height:200px;object-fit:cover;display:block}
+	.post-card__content{padding:1.25rem}
+	.post-card__title{margin:0 0 .5rem;font-size:1.25rem;color:var(--monet-purple)}
+	.post-card__title a{text-decoration:none;color:inherit}
+	.post-card__title a:hover{color:var(--monet-blue)}
+	.post-card__meta{font-size:.9rem;color:var(--monet-pink);margin-bottom:.75rem}
+	.post-card__excerpt{color:#666;font-size:.95rem;line-height:1.5;margin-bottom:1rem}
+	.post-card__tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+	.post-card__tags .tag{background:var(--monet-light-blue);color:var(--monet-blue);padding:.25rem .6rem;border-radius:16px;font-size:.78rem;text-decoration:none}
+	.post-card__tags .tag:hover{background:var(--monet-blue);color:#fff}
+	.post-card__footer{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+	.read-more{background:transparent;border:1px solid var(--monet-blue);color:var(--monet-blue);padding:.4rem .75rem;border-radius:8px;text-decoration:none;font-weight:600}
+	.read-more:hover{background:var(--monet-blue);color:#fff}
+	@media(max-width:900px){.site-grid{grid-template-columns:1fr;padding:1rem}.site-sidebar{position:relative;margin-bottom:1rem}}
+</style>
+<div class="site-grid">
+	<aside class="site-sidebar" aria-label="Primary">
+		<div class="sidebar-inner">
+			<h3 class="sidebar-title">Navigation</h3>
+			<nav class="main-navigation">
+				<ul>
+					{% if site.data.navigation and site.data.navigation.main %}
+						{% for item in site.data.navigation.main %}
+							<li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+						{% endfor %}
+					{% else %}
+						<li><a href="/posts/">Posts</a></li>
+						<li><a href="/categories/">Categories</a></li>
+						<li><a href="/tags/">Tags</a></li>
+						<li><a href="/about/">About</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</aside>
+	<main class="site-main">
+		<div class="posts-grid">
+			{% for post in site.posts %}
+				<article class="post-card">
+					{% if post.header and post.header.teaser %}
+						<a class="post-card__image-link" href="{{ post.url | relative_url }}">
+							<img class="post-card__image" src="{{ post.header.teaser }}" alt="{{ post.title }}">
+						</a>
+					{% endif %}
+					<div class="post-card__content">
+						<h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+						<div class="post-card__meta">{{ post.date | date: "%B %d, %Y" }}</div>
+						{% if post.excerpt %}
+							<div class="post-card__excerpt">{{ post.excerpt | strip_html | truncate:200 }}</div>
+						{% endif %}
+						<div class="post-card__footer">
+							<div>
+								{% if post.tags %}
+									<div class="post-card__tags">
+										{% for tag in post.tags %}
+											<a class="tag" href="/tags/#{{ tag | slugify }}">{{ tag }}</a>
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+							<a class="read-more" href="{{ post.url | relative_url }}">Read more</a>
+						</div>
+					</div>
+				</article>
+			{% endfor %}
+		</div>
+	</main>
+</div>
 
