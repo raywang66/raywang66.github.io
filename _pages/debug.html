@@ -1,0 +1,17 @@
+---
+layout: single
+title: Debug Pages
+permalink: /debug/
+---
+<h1>Site Pages Dump</h1>
+<ul>
+{% for p in site.pages %}
+  <li>{{ p.path }} | url: {{ p.url }} | layout: {{ p.layout }}</li>
+{% endfor %}
+</ul>
+<h2>Paginator presence test (on this debug page)</h2>
+{% if paginator %}
+<p>Debug page sees paginator (page {{ paginator.page }}).</p>
+{% else %}
+<p>Debug page does not see paginator object.</p>
+{% endif %}

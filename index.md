@@ -1,5 +1,6 @@
 ---
-layout: home-custom
-author_profile: true
-paginate: 5
+# neutralized placeholder (was index.md)
+exclude: true
 ---
+
+<!-- neutralized duplicate homepage markdown -->
