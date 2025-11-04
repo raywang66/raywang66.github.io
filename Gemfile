@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
-gem "github-pages", group: :jekyll_plugins
+gem "jekyll", "~> 4.3.3"
+gem "jekyll-remote-theme"
+gem "csv"
 
 gem "tzinfo-data"
 # wdm removed (fails to build on newer Ruby 3.4; optional for Windows file watching)
@@ -8,7 +10,7 @@ gem "tzinfo-data"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-paginate"
+  gem "jekyll-paginate-v2"
   gem "jekyll-sitemap"
   gem "jekyll-gist"
   gem "jekyll-feed"

@@ -1,6 +1,1 @@
----
-# neutralized placeholder (was index.md)
-exclude: true
----
-
-<!-- neutralized duplicate homepage markdown -->
+<!-- removed index.md content -->

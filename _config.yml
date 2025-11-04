@@ -38,8 +38,18 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
+
+# jekyll-paginate-v2 configuration
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title - page :num'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
@@ -48,6 +58,10 @@ include:
 exclude:
   - README.md
   - home.md
+  - index.md
+  - index.html
+  - page2.html
+  - page3.html
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -63,7 +77,8 @@ exclude:
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
+  - jekyll-remote-theme
+  - jekyll-paginate-v2
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed

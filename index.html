@@ -1,11 +1,21 @@
 ﻿---
-layout: default
+layout: home
 title: Home
 author_profile: true
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title - page :num'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
 ---
-{% assign per_page = 5 %}
+{% if paginator %}
 <div class="posts-grid">
-	{% for post in site.posts limit: per_page %}
+	{% for post in paginator.posts %}
 		<article class="post-card">
 			{% if post.header and post.header.teaser %}
 				<a href="{{ post.url | relative_url }}" class="post-card__image-link">
@@ -30,12 +40,18 @@ author_profile: true
 				</div>
 			</div>
 		</article>
-	  {% endfor %}
-	</div>
-	{% if site.posts.size > per_page %}
-	<nav class="pagination" aria-label="Pagination">
-	  <span class="page-number">Page 1 of {{ (site.posts.size | divided_by: per_page) | plus: 1 }}</span>
-	  <a class="next" href="/page2/">Older &raquo;</a>
-	</nav>
+	{% endfor %}
+</div>
+<nav class="pagination" aria-label="Pagination">
+	{% if paginator.previous_page %}
+		<a class="prev" href="{{ paginator.previous_page_path | relative_url }}">&laquo; Newer</a>
 	{% endif %}
+	<span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+	{% if paginator.next_page %}
+		<a class="next" href="{{ paginator.next_page_path | relative_url }}">Older &raquo;</a>
+	{% endif %}
+</nav>
+{% else %}
+<p>No paginator object found (build check).</p>
+{% endif %}
 
