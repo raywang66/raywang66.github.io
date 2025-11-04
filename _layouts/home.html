@@ -6,6 +6,11 @@ layout: default
   .site-grid{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;padding:2rem}
   .site-sidebar{position:sticky;top:1.5rem;padding:1rem;background:transparent}
   .sidebar-inner{background:var(--monet-cream);padding:1rem;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.04)}
+  .sidebar-logo img{width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center;display:block;margin:0 auto 1rem;box-shadow:0 0 0 3px var(--monet-light-blue),0 4px 10px rgba(0,0,0,0.15)}
+  /* Hide masthead logo so only sidebar brand shows */
+  .masthead .site-logo{display:none}
+  /* Optional: hide masthead title too. Uncomment if you want ONLY sidebar branding */
+  /* .masthead .site-title{display:none} */
   .sidebar-title{margin:0 0 .5rem;color:var(--monet-purple);font-size:1rem}
   .main-navigation ul{list-style:none;margin:0;padding:0}
   .main-navigation li{margin:0.5rem 0}
@@ -37,6 +42,13 @@ layout: default
 <div class="site-grid">
   <aside class="site-sidebar" aria-label="Primary">
     <div class="sidebar-inner">
+      {% if site.logo %}
+      <div class="sidebar-logo">
+        <a href="{{ '/' | relative_url }}" aria-label="{{ site.title }}">
+          <img src="{{ site.logo | relative_url }}" alt="{{ site.title }}">
+        </a>
+      </div>
+      {% endif %}
       <h3 class="sidebar-title">Navigation</h3>
       <nav class="main-navigation">
         <ul>
