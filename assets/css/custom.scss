@@ -98,3 +98,22 @@
     padding: 1rem;
   }
 }
+
+/* Circular logo styling */
+.site-logo img {
+  width: 60px;               /* Adjust size as desired */
+  height: 60px;              /* Equal width/height for circle */
+  border-radius: 50%;        /* Makes it circular */
+  object-fit: cover;         /* Ensures crop fills circle */
+  object-position: center;   /* Adjust focus area if needed (e.g., center 40%) */
+  display: block;
+  box-shadow: 0 0 0 2px var(--monet-cream), 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Optional: tighten spacing between logo and title */
+.greedy-nav .site-logo { margin-right: .65rem; }
+
+/* Optional dark-mode contrast (if user agents apply dark backgrounds) */
+@media (prefers-color-scheme: dark) {
+  .site-logo img { box-shadow: 0 0 0 2px #333, 0 2px 6px rgba(0,0,0,0.6); }
+}
